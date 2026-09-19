@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block judul_tab %}Toko Kue{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- BAGIAN 1: SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">DariKuki Menu</div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('halaman_menu') }}"
+                   class="{{ 'active' if active_page == 'menu' else '' }}">
+                    Menu
+                </a>
+                <a href="{{ url_for('halaman_dashboard') }}"
+                   class="{{ 'active' if active_page == 'dashboard' else '' }}">
+                    Dashboard Penjualan
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-area">
+            <!-- BAGIAN 2: JUDUL HALAMAN -->
+            <header class="title-bar">
+                <h1>{% block judul_halaman %}{% endblock %}</h1>
+            </header>
+
+            <!-- BAGIAN 3: ISI HALAMAN -->
+            <main class="content-area">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

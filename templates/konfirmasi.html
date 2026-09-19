@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block judul_tab %}Pesanan Diterima{% endblock %}
+{% block judul_halaman %}Pesanan Diterima{% endblock %}
+
+{% block content %}
+<div class="konfirmasi-box">
+    <p>Terima kasih, <strong>{{ nama_pemesan }}</strong>!</p>
+    <table class="tabel-konfirmasi">
+        <tr><td>Kue</td><td>{{ item.nama }}</td></tr>
+        <tr><td>Jumlah</td><td>{{ jumlah }} pcs</td></tr>
+        <tr><td>No. HP</td><td>{{ no_hp }}</td></tr>
+        <tr><td>Catatan</td><td>{{ catatan or "-" }}</td></tr>
+        <tr class="total-row"><td>Total</td><td>{{ total | rupiah }}</td></tr>
+    </table>
+    <p class="info-lanjut">Kami akan menghubungi kamu untuk konfirmasi pembayaran & pengiriman.</p>
+</div>
+
+<a class="link-kembali" href="{{ url_for('halaman_menu') }}">&larr; Kembali ke menu</a>
+{% endblock %}

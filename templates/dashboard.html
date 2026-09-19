@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block judul_tab %}Dashboard Penjualan{% endblock %}
+{% block judul_halaman %}Dashboard Penjualan{% endblock %}
+
+{% block content %}
+<form method="GET" class="filter-tanggal">
+    <div>
+        <label for="dari">Dari Tanggal</label>
+        <input type="date" id="dari" name="dari" value="{{ tanggal_dari }}">
+    </div>
+    <div>
+        <label for="sampai">Sampai Tanggal</label>
+        <input type="date" id="sampai" name="sampai" value="{{ tanggal_sampai }}">
+    </div>
+    <button type="submit" class="btn-pesan">Terapkan</button>
+    {% if tanggal_dari or tanggal_sampai %}
+    <a href="{{ url_for('halaman_dashboard') }}" class="filter-reset">Reset</a>
+    {% endif %}
+</form>
+
+<div class="ringkasan-grid">
+    <div class="ringkasan-card">
+        <p class="ringkasan-label">Total Pendapatan</p>
+        <p class="ringkasan-angka">{{ total_pendapatan | rupiah }}</p>
+    </div>
+    <div class="ringkasan-card">
+        <p class="ringkasan-label">Jumlah Pesanan</p>
+        <p class="ringkasan-angka">{{ total_pesanan }}</p>
+    </div>
+    <div class="ringkasan-card">
+        <p class="ringkasan-label">Kue Terjual</p>
+        <p class="ringkasan-angka">{{ total_kue_terjual }} pcs</p>
+    </div>
+    <div class="ringkasan-card">
+        <p class="ringkasan-label">Kue Terlaris</p>
+        <p class="ringkasan-angka ringkasan-angka-kecil">{{ terlaris }}</p>
+    </div>
+</div>
+
+<div class="chart-box">
+    <h2 class="subjudul">Grafik Penjualan</h2>
+    <canvas id="grafikPenjualan"></canvas>
+</div>
+
+<h2 class="subjudul">Riwayat Pesanan</h2>
+
+{% if pesanan %}
+<div class="tabel-wrapper">
+    <table class="tabel-pesanan">
+        <thead>
+            <tr>
+                <th>Waktu</th>
+                <th>Pemesan</th>
+                <th>Kue</th>
+                <th>Jumlah</th>
+                <th>No. HP</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in pesanan %}
+            <tr>
+                <td>{{ p.waktu }}</td>
+                <td>{{ p.nama_pemesan }}</td>
+                <td>{{ p.nama_kue }}</td>
+                <td>{{ p.jumlah }}</td>
+                <td>{{ p.no_hp }}</td>
+                <td>{{ p.total | rupiah }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="kosong">Belum ada pesanan masuk.</p>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script>
+    const ctx = document.getElementById('grafikPenjualan');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ grafik_labels | safe }},
+            datasets: [{
+                label: 'Total Penjualan (Rp)',
+                data: {{ grafik_data | safe }},
+                borderColor: '#8B0A0A',
+                backgroundColor: 'rgba(139, 10, 10, 0.12)',
+                tension: 0.3,
+                fill: true,
+                pointBackgroundColor: '#8B0A0A',
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { callback: (v) => 'Rp ' + v.toLocaleString('id-ID') }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

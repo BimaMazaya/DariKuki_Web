@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block judul_tab %}Semua Menu{% endblock %}
+{% block judul_halaman %}Semua Menu{% endblock %}
+
+{% block content %}
+<div class="menu-grid">
+    {% for kue in menu %}
+    <div class="kue-card">
+        <img src="{{ url_for('static', filename='images/' + kue.gambar) }}"
+             alt="{{ kue.nama }}"
+             onerror="this.src='https://via.placeholder.com/300x200?text=Foto+Kue'">
+        <div class="kue-info">
+            <h2>{{ kue.nama }}</h2>
+            <p class="deskripsi">{{ kue.deskripsi }}</p>
+            <p class="harga">{{ kue.harga | rupiah }}</p>
+            <a class="btn-pesan" href="{{ url_for('halaman_pesan', item_id=kue.id) }}">
+                Pesan Sekarang
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

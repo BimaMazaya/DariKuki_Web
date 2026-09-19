@@ -1,0 +1,430 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #FFFFFF;
+    color: #1A1A1A;
+}
+
+/* --- Layout utama: sidebar + title bar + konten --- */
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* BAGIAN 1: sidebar (cream/ivory) berisi pilihan halaman */
+.sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    background: #F5E6C8;
+    padding: 24px 16px;
+}
+
+.sidebar-brand {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+    color: #1A1A1A;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 12px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #1A1A1A;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-nav a.active {
+    background: white;
+    color: #8B0A0A;
+}
+
+.main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+/* BAGIAN 2: judul halaman (merah tua) */
+.title-bar {
+    background: #8B0A0A;
+    color: white;
+    padding: 20px 32px;
+}
+
+.title-bar h1 {
+    font-size: 1.5rem;
+}
+
+/* BAGIAN 3: isi halaman */
+.content-area {
+    padding: 24px 32px;
+    flex: 1;
+}
+
+/* --- Dashboard Penjualan --- */
+
+.dashboard-container {
+    max-width: 1000px;
+}
+
+.ringkasan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.ringkasan-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.ringkasan-label {
+    font-size: 0.85rem;
+    color: #6B6B6B;
+    margin-bottom: 8px;
+}
+
+.ringkasan-angka {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #8B0A0A;
+}
+
+.ringkasan-angka-kecil {
+    font-size: 1.1rem;
+}
+
+.subjudul {
+    margin-bottom: 12px;
+    color: #1A1A1A;
+}
+
+.tabel-wrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow-x: auto;
+}
+
+.tabel-pesanan {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabel-pesanan th,
+.tabel-pesanan td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #EAD7B0;
+    white-space: nowrap;
+}
+
+.tabel-pesanan th {
+    background: #FFF3D9;
+    color: #1A1A1A;
+    font-size: 0.85rem;
+}
+
+.kosong {
+    text-align: center;
+    color: #6B6B6B;
+    padding: 40px 0;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.kue-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.15s ease;
+}
+
+.kue-card:hover {
+    transform: translateY(-4px);
+}
+
+.kue-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.kue-info {
+    padding: 16px;
+}
+
+.kue-info h2 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+}
+
+.deskripsi {
+    font-size: 0.9rem;
+    color: #6B6B6B;
+    margin-bottom: 10px;
+    min-height: 40px;
+}
+
+.harga {
+    font-weight: bold;
+    color: #8B0A0A;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.btn-pesan {
+    display: inline-block;
+    background: #8B0A0A;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.btn-pesan:hover {
+    background: #7A0C0C;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #6B6B6B;
+    font-size: 0.85rem;
+}
+
+/* --- Halaman Form Pemesanan --- */
+
+.form-container {
+    max-width: 500px;
+}
+
+.ringkasan-item {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+}
+
+.ringkasan-item img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.form-pesan {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.form-pesan label {
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.form-pesan input,
+.form-pesan textarea {
+    padding: 10px;
+    border: 1px solid #EAD7B0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.form-pesan button {
+    margin-top: 20px;
+}
+
+.link-kembali {
+    display: inline-block;
+    margin-top: 20px;
+    color: #8B0A0A;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- Halaman Konfirmasi --- */
+
+.konfirmasi-box {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.tabel-konfirmasi {
+    width: 100%;
+    margin-top: 16px;
+    border-collapse: collapse;
+}
+
+.tabel-konfirmasi td {
+    padding: 8px 0;
+    border-bottom: 1px solid #EAD7B0;
+}
+
+.tabel-konfirmasi td:first-child {
+    color: #6B6B6B;
+    width: 40%;
+}
+
+.total-row td {
+    font-weight: bold;
+    color: #8B0A0A;
+    font-size: 1.1rem;
+    border-bottom: none;
+}
+
+.info-lanjut {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: #6B6B6B;
+}
+
+.kategori-badge {
+    display: inline-block;
+    padding: 8px 22px;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    margin: 28px 0 14px;
+}
+
+.kategori-badge:first-of-type {
+    margin-top: 0;
+}
+
+/* 3 gaya berbeda, berulang tiap 3 kategori */
+.kategori-warna-0 {
+    background: #8B0A0A;
+    color: white;
+}
+
+.kategori-warna-1 {
+    background: #1A1A1A;
+    color: white;
+}
+
+.kategori-warna-2 {
+    background: transparent;
+    border: 100px solid #8B0A0A;
+    color: #8B0A0A;
+    padding: 6px 20px; /* dikurangi karena ada border */
+}
+
+.qris-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.qris-box h3 {
+    margin-bottom: 12px;
+    color: #1A1A1A;
+}
+
+.qris-img {
+    width: 220px;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.qris-catatan {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: #6B6B6B;
+}
+.filter-tanggal {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+}
+
+.filter-tanggal label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #1A1A1A;
+}
+
+.filter-tanggal input[type="date"] {
+    padding: 8px 10px;
+    border: 1px solid #EAD7B0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.filter-reset {
+    color: #6B6B6B;
+    font-weight: bold;
+    text-decoration: none;
+    padding-bottom: 10px;
+}
+
+.filter-reset:hover {
+    color: #8B0A0A;
+}
+
+.chart-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+}
