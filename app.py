@@ -8,6 +8,7 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
+
 # ---------------------------------------------------
 # PENYIMPANAN PESANAN (Google Sheets)
 # ---------------------------------------------------
@@ -40,7 +41,14 @@ def baca_pesanan() -> pd.DataFrame:
         return pd.DataFrame(columns=KOLOM_PESANAN)
     return pd.DataFrame(data)
 
+# bagian koneksi credentials
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if os.environ.get("RENDER"):
+    CREDENTIALS_PATH = "/etc/secrets/credentials.json"
+else:
+    CREDENTIALS_PATH = os.path.join(BASE_DIR, "credentials.json")
 
+creds = Credentials.from_service_account_file(CREDENTIALS_PATH, scopes=SCOPES)
 # ---------------------------------------------------
 # DATA MENU KUE
 # Ganti / tambah item di sini sesuai kue yang kamu jual
@@ -219,4 +227,5 @@ def halaman_dashboard():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
